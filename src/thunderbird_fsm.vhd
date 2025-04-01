@@ -119,18 +119,39 @@ begin
 		           ( f_S(2) and f_S(1) and (not f_S(0)) );
 
 	-- output logic --
-	o_lights_L(0) <= 
-    o_lights_L(1) <= 
-	o_lights_L(2) <= 
+	o_lights_L(0) <= ( (not f_S(2)) and (not f_S(1)) and f_S(0) ) or
+	                 ( f_S(2) and f_S(0) ) or
+	                 ( f_S(2) and f_S(1) and (not f_S(0)) );
+    
+    o_lights_L(1) <= ( (not f_S(2)) and (not f_S(1)) and f_S(0) ) or
+                     ( f_S(2) and f_S(1) );
+	
+	o_lights_L(2) <= ( (not f_S(2)) and (not f_S(1)) and f_S(0) ) or
+	                 ( f_S(2) and f_S(1) and f_S(0) );
 
-	o_lights_R(0) <= 
-	o_lights_R(1) <= 
-	o_lights_R(2) <= 
+
+	o_lights_R(0) <= ( (not f_S(2)) and f_S(1) and (not f_S(0)) ) or
+	                 ( (not f_S(2)) and (f_S(0)) ) or
+	                 ( (f_S(2)) and (not f_S(1)) and (not f_S(0)) );
+	
+	o_lights_R(1) <= ( f_S(2) and (not f_S(1)) and (not f_S(0)) ) or
+	                 ( (not f_S(2)) and f_S(0) );
+	
+	o_lights_R(2) <= ( (not f_S(2)) and (not f_S(1)) and f_S(0) ) or
+	                 ( f_S(2) and f_S(1) and (not f_S(0)) );
+	                 
 
     ---------------------------------------------------------------------------------
 	
 	-- PROCESSES --------------------------------------------------------------------
-    
+	register_proc : process (i_clk, i_reset) --c/p from ice4
+    begin
+        if i_reset = '1' then
+            f_S <= "000";
+        elsif rising_edge(i_clk) then
+            f_S <= f_S_next;    -- next state becomes current state
+        end if;
+	end process register_proc;
 	-----------------------------------------------------					   
 				  
 end thunderbird_fsm_arch;
