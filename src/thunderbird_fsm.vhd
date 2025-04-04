@@ -106,7 +106,7 @@ begin
 	-- CONCURRENT STATEMENTS --------------------------------------------------------	
 	
 	-- next state --
-	f_S_next(0) <= ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_left and (not i_right) ) or 
+	f_S_next(0) <= ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and (not i_left) and i_right ) or 
 	               ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_right and i_left) or
 	               ( (not f_S(2)) and f_S(1) and (not f_S(0)) ) or
 	               ( f_S(2) and (not f_S(1)) and (not f_S(0)) );
@@ -118,7 +118,7 @@ begin
 	               
 	               
 	f_S_next(2) <= ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_left and i_right ) or
-		           ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and (not i_right) and i_left ) or 
+		           ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_left and (not i_right) ) or 
 		           ( f_S(2) and (not f_S(1)) and (not f_S(0)) ) or
 		           ( f_S(2) and (not f_S(1)) and f_S(0) );
 		           
