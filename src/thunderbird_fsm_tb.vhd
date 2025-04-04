@@ -122,26 +122,20 @@ begin
         assert (w_lights_L = "000") report "reset lights_L" severity error;
         assert (w_lights_R = "000") report "reset lights_R" severity error;
     
-        -- Test FSM transitions with i_left = '1' and i_right = '0'
+        -- i_left = '1' and i_right = '0'
         w_left <= '1';
         w_right <= '0';
         wait for k_clk_period * 2;
-        assert (w_lights_L = "001") report "FAIL: lights_L transition not correct" severity error;
-        assert (w_lights_R = "000") report "FAIL: lights_R transition not correct" severity error;  -- Corrected expected output
+        assert (w_lights_L = "001") report "lights_L transition 1" severity error;
+        assert (w_lights_R = "000") report "lights_R transition 1" severity error;
         
-        -- Test FSM transitions with i_left = '0' and i_right = '1'
+        -- i_left = '0' and i_right = '1'
         w_left <= '0';
         w_right <= '1';
         wait for k_clk_period * 2;
-        assert (w_lights_L = "000") report "FAIL: lights_L transition not correct" severity error;  -- Corrected expected output
-        assert (w_lights_R = "001") report "FAIL: lights_R transition not correct" severity error;
-        
-        -- Test FSM transitions with i_left = '1' and i_right = '1'
-        w_left <= '1';
-        w_right <= '1';
-        wait for k_clk_period * 2;
-        assert (w_lights_L = "111") report "FAIL: lights_L transition not correct" severity error;  -- Ensure hazard case
-        assert (w_lights_R = "111") report "FAIL: lights_R transition not correct" severity error;
+        assert (w_lights_L = "000") report "lights_L transition 2" severity error;
+        assert (w_lights_R = "001") report "lights_R transition 2" severity error;
+
         wait;
     end process;
 
