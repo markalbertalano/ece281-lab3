@@ -107,7 +107,8 @@ begin
 	
 	-- next state --
 	f_S_next(0) <= ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_left and i_right ) or 
-	               ( (f_S(1)) and (not f_S(0)) );
+	               ( (f_S(1)) and (not f_S(0)) ) or
+	               ( (f_S(2)) and (not f_S(1)) and (not f_S(0)) and i_left and i_right );
 	               
 	f_S_next(1) <= ( (not f_S(2)) and (not f_S(1)) and (not f_S(0)) and (not i_left) and i_right ) or 
 	               ( f_S(2) and (not f_S(1)) and f_S(0) ) or 
